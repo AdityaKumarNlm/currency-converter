@@ -1,0 +1,151 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<title></title>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+		<link rel = "stylesheet" href = "https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/0.9.7/angular-material.css">
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+		<script src="http://code.highcharts.com/highcharts.js"></script>
+
+
+		<script src="js/converter.js"></script>
+		<script src="js/moment.min.js"></script>
+		<script src="js/data.js"></script>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <style type="text/css">
+        	.highcharts-container{
+        		max-width: 100%;
+        	}
+        	.dateLeft{
+        		width: 50%;
+        		float: left;
+        	}
+        	.dateLeft md-datepicker{
+        		float: left;
+        		margin-right: 0;
+        	}
+
+        	.dateRight{
+        		width: 50%;
+        		float: right;
+        	}
+        	.dateRight md-datepicker{
+        		float: right;
+        		margin-right: 0;
+        	}
+
+        	.row2 .panel-body{
+        		padding-bottom: 60px;
+        	}
+
+        	#container1 text.highcharts-credits{
+        		display: none !important;
+        	}
+        	@media only screen and (max-width: 568px){
+        		.dateLeft, .dateRight{
+	        		width: 100%;
+	        		float: none;
+	        	}
+	        	.dateLeft md-datepicker, .dateRight md-datepicker{
+	        		float: none;
+	        	}
+
+	        	.row2 .panel-body{
+	        		padding-bottom: 10px;
+	        	}
+        	}
+        </style>
+	</head>
+	
+	<body ng-app="app">
+
+		<div class="container" ng-controller="ctrl">
+			<div class="page-header">
+				Currency Converter Assignment
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<form name="userForm" id="userForm" class="form">
+								<legend>Currency Converter</legend>
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group">
+										<label for="exampleSelect1">From</label>
+										<select class="form-control" id="exampleSelect1" ng-model="fromCountry" class="form-control ng-pristine ng-valid ng-valid-required ng-touched" ng-options="country for (country, value) in dataObj track by value" ng-change="fexConvert(true)" required>
+											<option value="">Select Country</option>
+										</select>
+
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group">
+										<label for="exampleSelect2">To</label>
+										<select class="form-control" id="exampleSelect2" ng-model="toCountry" class="form-control ng-pristine ng-valid ng-valid-required ng-touched" ng-options="country for (country, value) in dataObj track by value" ng-change="fexConvert()" required>
+											<option value="">Select Country</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group">
+										<label for="exampleSelect1">From Value</label>
+										<input type="number" class="form-control ng-pristine ng-valid ng-touched" placeholder="Enter value" data-ng-model="fromValue" data-ng-change="fexConvert()">
+									</div>
+								</div>
+
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+									<div class="form-group">
+										<label for="exampleSelect1">To Value</label>
+										<input type="text" class="form-control ng-pristine ng-valid ng-touched" placeholder="Enter value" data-ng-model="toValue" data-ng-change="fexConvert()">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row row2">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<md-content class="dateLeft">
+								<md-datepicker
+									
+									ng-model = "fromDate" 
+									md-placeholder = "Enter date"
+									md-min-date = "fromDateMin" 
+									md-max-date = "fromDateMax"
+									ng-change="makeGraph()">
+					            </md-datepicker>
+							</md-content>
+
+							<md-content class="dateRight">
+								<md-datepicker 
+									
+					               ng-model = "toDate" 
+					               md-placeholder = "Enter date"
+					               md-min-date = "toDateMin" 
+					               md-max-date = "toDateMax"
+					               ng-change="makeGraph()">
+					            </md-datepicker>
+							</md-content>	
+							<div id="container1" style="min-width: 310px; height: 450px; margin: 0 auto">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
