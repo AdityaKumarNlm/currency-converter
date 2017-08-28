@@ -89,7 +89,7 @@ app.controller('ctrl', [ '$scope','$http', '$window', function($scope,$http,$win
 	        },
 	        yAxis: {
 	            title: {
-	                text: 'Exchange rate'
+	                text: 'Exchange Rate'
 	            }
 	        },
 	        legend: {
